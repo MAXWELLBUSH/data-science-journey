@@ -1,0 +1,267 @@
+Subtopic 4 — Conditional Statements
+
+A conditional statement allows a program to make a decision based on whether a condition is True or False.
+
+Think of it as:
+
+IF something is true → do this. OTHERWISE → do something else.
+
+1. What is a Condition?
+
+A condition is an expression that produces either:
+
+True
+
+or
+
+False
+
+Example:
+
+age >= 18
+
+If age = 20:
+
+20 >= 18 → True
+
+If age = 15:
+
+15 >= 18 → False
+2. The if Statement
+
+The if statement executes code only when its condition is True.
+
+age = 20
+
+if age >= 18:
+    print("Adult")
+
+Because 20 >= 18 is true, the program prints:
+
+Adult
+
+If age were 15, nothing would be printed.
+
+Basic structure
+if condition:
+    statement
+3. The else Statement
+
+else provides an alternative when the if condition is False.
+
+age = 15
+
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+
+Output:
+
+Minor
+
+Think:
+
+          Condition
+          /       \
+       True       False
+        ↓           ↓
+      IF          ELSE
+4. The elif Statement
+
+elif means:
+
+else if
+
+It allows you to check multiple conditions.
+
+Example:
+
+marks = 75
+
+if marks >= 80:
+    print("A")
+elif marks >= 70:
+    print("B")
+elif marks >= 60:
+    print("C")
+else:
+    print("Fail")
+
+Output:
+
+B
+Important
+
+Python checks conditions from top to bottom.
+
+Once it finds a condition that is True, it executes that block and skips the remaining elif/else blocks.
+
+5. Why Order Matters
+
+Consider:
+
+marks = 85
+
+if marks >= 50:
+    print("Pass")
+elif marks >= 80:
+    print("Excellent")
+
+The output will be:
+
+Pass
+
+Why?
+
+Because Python encounters:
+
+marks >= 50
+
+first.
+
+Since 85 >= 50 is True, it stops checking the remaining conditions.
+
+A better order would be:
+
+if marks >= 80:
+    print("Excellent")
+elif marks >= 50:
+    print("Pass")
+else:
+    print("Fail")
+
+Now 85 produces:
+
+Excellent
+6. Multiple Conditions
+
+You can combine conditions using logical operators.
+
+and
+
+Both conditions must be True.
+
+age >= 18 and age <= 35
+
+Example:
+
+age = 25
+
+Both are true:
+
+25 >= 18 → True
+25 <= 35 → True
+
+Therefore:
+
+True and True → True
+or
+
+At least one condition must be True.
+
+age < 18 or age > 65
+not
+
+Reverses the result.
+
+not True
+
+becomes:
+
+False
+7. Nested if Statements
+
+A nested if is an if statement inside another if statement.
+
+Example:
+
+age = 20
+has_id = True
+
+if age >= 18:
+    if has_id:
+        print("Entry allowed")
+
+The second condition is checked only if the first condition is True.
+
+You can visualize it as:
+
+Age >= 18?
+   ↓
+  YES
+   ↓
+Has ID?
+   ↓
+  YES
+   ↓
+Entry allowed
+8. Conditional Statements in Data Science
+
+Conditional logic is extremely useful in data analysis.
+
+For example, you might classify customers:
+
+if spending >= 10000:
+    category = "High Value"
+elif spending >= 5000:
+    category = "Medium Value"
+else:
+    category = "Low Value"
+
+Or classify model predictions:
+
+if probability >= 0.5:
+    prediction = "Churn"
+else:
+    prediction = "No Churn"
+
+So conditional statements are fundamental to programmatic thinking and data science.
+
+9. Connection to Flowcharts
+
+Python:
+
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+
+Flowchart:
+
+             START
+               ↓
+          INPUT age
+               ↓
+         ┌──────────┐
+        < age >= 18? >
+         └──────────┘
+           ↙      ↘
+         YES       NO
+          ↓         ↓
+       Adult      Minor
+           ↘      ↙
+              END
+
+The diamond represents the condition.
+
+10. Key Things to Remember
+if
+
+Check the first condition.
+
+elif
+
+Check another condition if the previous one was False.
+
+else
+
+Execute when none of the previous conditions were True.
+
+Structure
+if condition:
+    ...
+elif another_condition:
+    ...
+else:
+    ...
