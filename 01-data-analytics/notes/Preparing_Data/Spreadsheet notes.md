@@ -941,3 +941,170 @@ DAY()	Gets the day
 DATEDIF()	Calculates date differences
 
 Key idea: Excel stores dates as values, which is why you can perform calculations such as TODAY()-B2.
+
+
+23. Absolute vs Relative References
+
+This is very important.
+
+Suppose:
+
+=A2*B2
+
+When you drag it down, it becomes:
+
+=A3*B3
+=A4*B4
+=A5*B5
+
+That's a relative reference.
+
+Absolute Reference
+
+Suppose you have a tax rate:
+
+F1 = 16%
+
+You want every row to use F1.
+
+Use:
+
+=B2*$F$1
+
+The $ locks the cell.
+
+When dragged down:
+
+=B3*$F$1
+=B4*$F$1
+=B5*$F$1
+
+F1 remains fixed.
+
+
+24. VLOOKUP / XLOOKUP
+
+These are lookup functions. They are used when you want to find information in a table based on a matching value.
+
+Think of it as:
+
+"I know this person's ID. Find me their name/salary/department."
+
+🔹 Practical Example
+
+Imagine you have this table:
+
+A — ID	B — Employee	C — Department	D — Salary
+101	Alex	IT	80,000
+102	Brian	HR	55,000
+103	Carol	Finance	110,000
+104	Diana	IT	70,000
+105	Eric	Finance	95,000
+
+Now suppose you enter an ID in F2:
+
+103
+
+You want Excel/Google Sheets to automatically find the employee's name.
+
+1. VLOOKUP
+
+The formula is:
+
+=VLOOKUP(F2,A2:D6,2,FALSE)
+
+This returns:
+
+Carol
+
+Break it down:
+=VLOOKUP(what to find, where to search, column to return, exact match)
+
+So:
+
+F2 → 103, the ID we're looking for
+A2:D6 → the table
+2 → return the value from the 2nd column
+FALSE → look for an exact match
+What happens?
+
+Sheets searches the first column:
+
+101
+102
+103 ← FOUND!
+104
+105
+
+Then it moves across to column 2:
+
+Carol
+
+🔹 Get the department
+
+Change 2 to 3:
+
+=VLOOKUP(F2,A2:D6,3,FALSE)
+
+Result:
+
+Finance
+
+Get the salary:
+
+=VLOOKUP(F2,A2:D6,4,FALSE)
+
+Result:
+
+110,000
+
+2. XLOOKUP
+
+XLOOKUP is a newer and more flexible lookup function.
+
+For the same example:
+
+=XLOOKUP(F2,A2:A6,B2:B6)
+
+Result:
+
+Carol
+
+Break it down
+=XLOOKUP(what to find, where to look, what to return)
+
+So:
+
+F2 → 103
+A2:A6 → search the ID column
+B2:B6 → return the Employee column
+Get Department
+=XLOOKUP(F2,A2:A6,C2:C6)
+
+Result:
+
+Finance
+
+Get Salary
+=XLOOKUP(F2,A2:A6,D2:D6)
+
+Result:
+
+110,000
+
+🆚 VLOOKUP vs XLOOKUP
+VLOOKUP	XLOOKUP
+Older function	Newer function
+Uses column number	Uses return range
+2, 3, 4 specify columns	You directly specify the column
+Usually searches from left to right	Can search left or right
+More restrictive	More flexible
+🧠 Easy way to remember
+
+VLOOKUP:
+
+"Find this value in the first column and go VERTICALLY → across the table."
+
+XLOOKUP:
+
+"Find this value here, and return the corresponding value there."
