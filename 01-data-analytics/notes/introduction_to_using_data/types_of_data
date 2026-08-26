@@ -1,0 +1,285 @@
+1. Types of Data
+
+At the broadest level, data is commonly divided into:
+
+1. Quantitative data → numerical data
+2. Qualitative data → descriptive/categorical data
+
+Think of it as:
+
+DATA
+│
+├── Quantitative (numbers)
+│   ├── Discrete
+│   └── Continuous
+│
+└── Qualitative (categories/descriptions)
+    ├── Nominal
+    └── Ordinal
+2. Data Types
+
+A data type describes what kind of value a variable contains.
+
+Common data types include:
+
+Data type	Meaning	Example
+Integer	Whole numbers	10, 25, -3
+Float/Decimal	Numbers with decimals	3.14, 25.5
+String/Text	Characters or words	"Kenya"
+Boolean	True/False	True
+Date/Time	Dates or times	2026-08-26
+Categorical	Values representing groups/categories	"Male", "Female"
+Important distinction
+
+Data type and type of data aren't always the same thing.
+
+For example:
+
+Age = 25
+Type of data → Quantitative
+Data type → Integer
+
+And:
+
+Country = "Kenya"
+Type of data → Qualitative
+Data type → String/Categorical
+3. Quantitative Data
+
+Quantitative data is data that represents quantities and can be expressed using numbers.
+
+You can perform mathematical operations on it.
+
+Examples:
+
+Age = 25
+Salary = 50,000
+Height = 1.75 m
+Number of students = 40
+Temperature = 28.5°C
+
+Quantitative data has two main categories:
+
+A. Discrete Data
+
+Discrete data is countable and usually consists of whole numbers.
+
+Examples:
+
+Number of students = 40
+Number of cars = 15
+Number of children = 3
+Number of products sold = 250
+
+You can count them:
+
+1, 2, 3, 4, 5...
+
+You generally wouldn't say:
+
+I have 3.7 children.
+
+So children are discrete.
+
+Easy memory trick
+
+Discrete = Counted
+
+B. Continuous Data
+
+Continuous data can take any value within a range, including decimals.
+
+Examples:
+
+Height = 1.753 m
+Weight = 65.7 kg
+Temperature = 28.6°C
+Time = 12.53 seconds
+Distance = 5.72 km
+
+For example, someone's height could be:
+
+1.7 m
+1.75 m
+1.753 m
+1.7532 m
+1.75325 m
+
+There can theoretically be infinitely many values between two points.
+
+Easy memory trick
+
+Continuous = Measured
+
+4. Qualitative Data
+
+Qualitative data describes characteristics, qualities, or categories rather than quantities.
+
+Examples:
+
+Gender → Male/Female
+Eye color → Brown/Blue/Green
+Country → Kenya/Uganda/Tanzania
+Blood group → A/B/AB/O
+Education level → Primary/Secondary/University
+
+You don't normally perform arithmetic on these values.
+
+For example:
+
+Country:
+Kenya
+Uganda
+Tanzania
+
+It doesn't make sense to calculate:
+
+Kenya + Uganda
+5. Qualitative Data Categories
+
+Qualitative data has two important categories:
+
+A. Nominal Data
+
+Nominal data consists of categories that have no natural order or ranking.
+
+Examples:
+
+Gender:
+Male
+Female
+Country:
+Kenya
+Uganda
+Tanzania
+Eye color:
+Brown
+Blue
+Green
+
+There is no meaningful ranking:
+
+Kenya > Uganda > Tanzania
+
+That wouldn't make sense.
+
+Easy memory trick
+
+Nominal = Names
+
+It's basically labels or names.
+
+B. Ordinal Data
+
+Ordinal data consists of categories that have a meaningful order or ranking.
+
+Examples:
+
+Satisfaction
+Very dissatisfied
+Dissatisfied
+Neutral
+Satisfied
+Very satisfied
+
+There is an order:
+
+Very dissatisfied
+       ↓
+Dissatisfied
+       ↓
+Neutral
+       ↓
+Satisfied
+       ↓
+Very satisfied
+Education level
+Primary
+Secondary
+University
+Postgraduate
+
+There is an order.
+
+Rating
+Poor
+Fair
+Good
+Excellent
+
+Again, there is an order.
+
+However, the difference between categories isn't necessarily measurable.
+
+For example, the difference between "Good" and "Excellent" isn't necessarily the same as the difference between "Fair" and "Good."
+
+Easy memory trick
+
+Ordinal = Order
+
+6. The Most Important Diagram
+
+Memorize this:
+
+                         DATA
+                           │
+             ┌─────────────┴─────────────┐
+             │                           │
+      QUANTITATIVE                  QUALITATIVE
+        (Numbers)                  (Categories)
+             │                           │
+       ┌─────┴─────┐               ┌─────┴─────┐
+       │           │               │           │
+   DISCRETE   CONTINUOUS       NOMINAL     ORDINAL
+   (Counted)   (Measured)      (Names)     (Order)
+7. Examples
+Variable	Type of data	Category
+Number of students	Quantitative	Discrete
+Age	Quantitative	Continuous*
+Height	Quantitative	Continuous
+Number of cars	Quantitative	Discrete
+Temperature	Quantitative	Continuous
+Country	Qualitative	Nominal
+Eye color	Qualitative	Nominal
+Gender	Qualitative	Nominal
+Satisfaction level	Qualitative	Ordinal
+Education level	Qualitative	Ordinal
+Customer rating	Qualitative	Ordinal
+
+*Age is often treated as continuous because time is continuously measurable, although it may be recorded as whole-number integers in a dataset.
+
+8. Quick way to identify them
+
+Ask these questions:
+
+Question 1: Is it numerical and represents an amount?
+
+Yes → Quantitative
+
+Then ask:
+
+Can I count it?
+
+Yes → Discrete
+
+Do I measure it?
+
+Yes → Continuous
+
+Question 2: Is it a category/description?
+
+Yes → Qualitative
+
+Then ask:
+
+Does the category have an order?
+
+No → Nominal
+
+Yes → Ordinal
+
+One-line memory trick:
+
+Quantitative → numbers → Discrete/Continuous
+
+Qualitative → categories → Nominal/Ordinal
