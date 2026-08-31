@@ -1,0 +1,852 @@
+What is Data Formatting in Data Analytics?
+
+Data formatting is the process of changing data into a consistent, organized, and usable format so that it can be easily analyzed, visualized, or used in calculations.
+
+Think of it as making messy data look and behave correctly.
+
+Example
+
+Suppose you have this data in Excel:
+
+Name	Date	Salary	Gender
+John	1/5/24	50000	M
+Mary	05-01-2024	50,000	Female
+Peter	January 5 2024	50000 KES	Male
+
+The data represents similar information, but the formats are inconsistent.
+
+You could format it as:
+
+Name	Date	Salary	Gender
+John	05/01/2024	50,000	Male
+Mary	05/01/2024	50,000	Female
+Peter	05/01/2024	50,000	Male
+
+Now the data is consistent and easier to analyze.
+
+Common data formatting tasks
+
+In Excel/Google Sheets, data formatting can include:
+
+Dates
+
+1/5/24
+05-Jan-2024
+January 5, 2024
+
+→ Choose one consistent format.
+
+Numbers
+50000
+50,000
+50,000.00
+Currency
+50000
+KES 50,000
+$50,000
+
+Text
+
+kenya
+KENYA
+Kenya
+
+→ Standardize to Kenya.
+
+Percentages
+
+0.25
+25%
+
+→ Make sure the values are represented consistently.
+
+Decimal places
+
+12
+12.5
+12.50
+
+→ You might choose 2 decimal places.
+
+Units
+
+5 kg
+5000 g
+
+→ Convert them to the same unit if you're analyzing them together.
+
+Formatting vs Cleaning
+
+They are related but not exactly the same.
+
+Data formatting = making the data's appearance and representation consistent.
+
+Data cleaning = fixing errors, missing values, duplicates, incorrect entries, etc.
+
+For example:
+
+kenya, KENYA, Kenya
+
+→ Formatting/standardization
+
+Kenya, Keny, Kenya
+
+→ Data cleaning because Keny is likely an incorrect value.
+
+Simple definition to remember
+
+Data formatting is organizing and standardizing the way data is represented so it can be easily read, analyzed, and interpreted.
+
+For your Excel/data analytics learning, dates, numbers, currency, percentages, text, decimals, and units are the main formatting areas to understand.
+
+data quality,exploring ways to ensure data quality,common data quality issues,how issues relate to measuring data quality , and at the end of teaching me give me 20 questions i answer and you mark for me
+
+Absolutely. Let's treat this like a Data Analytics lesson. I'll teach you the concepts first, give practical Excel examples, then give you 20 questions without answers. You answer them, and I'll mark you.
+
+📊 DATA QUALITY
+1. What is Data Quality?
+
+Data quality refers to how accurate, complete, consistent, reliable, relevant, and timely data is for its intended purpose.
+
+In simple terms:
+
+Good-quality data is data that can be trusted and is fit for the purpose you want to use it for.
+
+Example
+
+Imagine a hospital has this data:
+
+Patient	Age	Gender	Phone
+John	25	Male	0712345678
+Mary	32	Female	0798765432
+Peter	-5	Male	0712345678
+Sarah		Female	
+
+There are quality problems:
+
+Peter's age is impossible → Accuracy/validity problem
+Sarah's age is missing → Completeness problem
+Sarah's phone is missing → Completeness problem
+John and Peter have the same phone number → potentially uniqueness problem
+
+So, before analyzing the data, you need to investigate and fix these issues.
+
+2. Why Does Data Quality Matter?
+
+Imagine you're analyzing sales data to determine which product sells the most.
+
+Your data says:
+
+Product	Sales
+Laptop	100
+Phone	200
+Laptop	150
+Phne	500
+
+You might conclude:
+
+"Phne is the best-selling product."
+
+But "Phne" is probably a typo for "Phone."
+
+The actual result could be:
+
+Product	Total Sales
+Laptop	250
+Phone	700
+
+Poor-quality data can therefore lead to:
+
+Wrong conclusions
+Bad business decisions
+Incorrect reports
+Misleading visualizations
+Incorrect predictions/models
+Financial losses
+Remember:
+
+Garbage in → garbage out.
+
+If your input data is poor, your analysis can also be poor.
+
+3. How Do We Ensure Data Quality?
+
+There isn't one single method. Analysts use several approaches.
+
+A. Data Validation
+
+Data validation checks whether data follows predefined rules.
+
+For example, if you're collecting age:
+
+Age must be between 0 and 120.
+
+In Excel, you can use:
+
+Data → Data Validation
+
+For example:
+
+Allow: Whole number
+Minimum: 0
+Maximum: 120
+
+Now someone can't easily enter:
+
+-20
+
+or
+
+500
+4. Standardization
+
+Make values follow the same format.
+
+For example:
+
+Kenya
+KENYA
+kenya
+Kenya
+
+These technically represent the same country.
+
+You can standardize them to:
+
+Kenya
+Kenya
+Kenya
+Kenya
+
+Another example:
+
+Male
+M
+MALE
+male
+
+Standardize to:
+
+Male
+Male
+Male
+Male
+
+This is particularly important when you're doing:
+
+Pivot tables
+Filtering
+Grouping
+Counting
+Charts
+
+Otherwise Excel may treat them as different categories.
+
+5. Removing Duplicates
+
+Duplicates can distort your analysis.
+
+Example:
+
+Customer ID	Name	Purchase
+101	John	5,000
+102	Mary	3,000
+101	John	5,000
+
+If the third row is accidentally duplicated, your total sales could be overstated.
+
+In Excel:
+
+Data → Remove Duplicates
+
+But be careful!
+
+Not every duplicate-looking row is actually an error.
+
+For example:
+
+Customer	Product
+John	Laptop
+John	Phone
+
+John appears twice, but these are legitimate transactions.
+
+So you must understand the dataset before deleting duplicates.
+
+6. Handling Missing Data
+
+Missing data occurs when information that should exist is absent.
+
+Example:
+
+Name	Age	Salary
+John	25	50,000
+Mary		60,000
+Peter	30	
+
+Mary's age and Peter's salary are missing.
+
+You have several possible approaches.
+
+Option 1: Leave it missing
+
+Sometimes missing data is acceptable.
+
+Option 2: Remove the record
+
+If a row has too much missing information, you might remove it.
+
+Option 3: Fill/impute the value
+
+For numerical data, you might use:
+
+Mean
+Median
+Mode
+
+For example:
+
+20
+25
+30
+35
+
+Mean:
+
+27.5
+
+You could potentially use the mean to fill a missing value, depending on the context.
+
+Important: Don't automatically replace every missing value with the mean. The appropriate method depends on the dataset and why the data is missing.
+
+7. Checking Data Types
+
+Each column should contain the appropriate type of data.
+
+For example:
+
+Age
+20
+25
+30
+
+Age should be numerical.
+
+But suppose you have:
+
+Age
+20
+25
+twenty
+30
+
+Now "twenty" is text while the other values are numbers.
+
+This can cause problems with:
+
+=AVERAGE(A2:A5)
+
+or other calculations.
+
+Common data types include:
+
+Text
+Number
+Date
+Boolean
+Currency
+Percentage
+8. Exploring Ways to Ensure Data Quality
+
+As a data analyst, you shouldn't simply assume your data is good.
+
+You should investigate it.
+
+A useful process is:
+
+Step 1: Understand the data
+
+Ask:
+
+Where did it come from?
+What does each column mean?
+What does each row represent?
+What time period does it cover?
+Step 2: Inspect the data
+
+Look at:
+
+First few rows
+Last few rows
+Column names
+Number of rows
+Number of columns
+Data types
+Step 3: Check for missing values
+
+Ask:
+
+Are there blank cells?
+
+For example:
+
+Age: 5 missing
+Salary: 2 missing
+Department: 0 missing
+Step 4: Check for duplicates
+
+Ask:
+
+Are some records repeated?
+
+Step 5: Check for incorrect values
+
+For example:
+
+Age = -5
+Salary = -100000
+Gender = "Banana"
+
+These may indicate errors.
+
+Step 6: Check consistency
+
+Look for things like:
+
+Kenya
+kenya
+KENYA
+K.E.N.Y.A
+Step 7: Check validity
+
+Ask:
+
+Does the data follow the rules?
+
+For example:
+
+Age should be 0–120
+Percentage should be 0–100%
+Step 8: Document the problems
+
+As an analyst, don't just change things without recording what you did.
+
+For example:
+
+Issue	Column	Action
+Missing values	Age	Filled using median
+Duplicate records	Customer ID	Removed
+Incorrect spelling	Country	Standardized
+Invalid age	Age	Investigated
+
+This creates a data-cleaning trail.
+
+9. Common Data Quality Issues
+
+You should know these very well.
+
+1. Missing Data
+
+Information is absent.
+
+Example:
+
+Name: John
+Age: [blank]
+Salary: 50,000
+2. Duplicate Data
+
+The same record appears more than once.
+
+Example:
+
+Customer ID: 101
+Customer ID: 101
+3. Inaccurate Data
+
+The information is incorrect.
+
+Example:
+
+Actual age = 25
+Recorded age = 52
+4. Inconsistent Data
+
+The same information is represented differently.
+
+Example:
+
+Male
+M
+male
+MALE
+5. Invalid Data
+
+The value violates a rule.
+
+Example:
+
+Age = -10
+6. Outdated Data
+
+The information is no longer current.
+
+Example:
+
+A customer changed their phone number but your database still contains the old number.
+
+7. Incorrect Data Type
+
+Example:
+
+Salary = "Fifty thousand"
+
+when salary should be numerical.
+
+8. Formatting Problems
+
+Example:
+
+Dates:
+
+01/02/2026
+2026-02-01
+February 1, 2026
+
+If you're not careful, different formats can create confusion.
+
+9. Outliers
+
+An outlier is a value that is unusually different from other observations.
+
+Example:
+
+45
+50
+52
+48
+51
+5000
+
+5000 is an obvious outlier.
+
+But remember:
+
+An outlier isn't automatically an error.
+
+Maybe the person really earned 5,000 while everyone else earned around 50.
+
+You need to investigate.
+
+10. How Issues Relate to Measuring Data Quality
+
+This is one of the most important parts.
+
+Data quality can be measured using several dimensions.
+
+Think of these dimensions as different questions you ask about your data.
+
+Dimension 1: Accuracy
+Question:
+
+Is the data correct?
+
+Example:
+
+Actual age:
+
+25
+
+Database:
+
+52
+
+❌ Poor accuracy.
+
+11. Completeness
+Question:
+
+Is all the required information present?
+
+Example:
+
+Name	Age	Salary
+John	25	50,000
+Mary		60,000
+
+Mary's age is missing.
+
+Therefore:
+
+❌ The dataset has a completeness problem.
+
+A simple completeness measure could be:
+
+Completeness =
+Number of non-missing values
+÷
+Number of expected values
+× 100
+
+Suppose you have 100 expected age values and 95 are present:
+
+95 ÷ 100 × 100 = 95%
+
+So age completeness is 95%.
+
+12. Consistency
+Question:
+
+Does the data agree with itself and follow the same standards?
+
+Example:
+
+Kenya
+Kenya
+KENYA
+kenya
+
+This is inconsistent representation.
+
+Another example:
+
+A customer is recorded as:
+
+Age = 25
+
+in one system and:
+
+Age = 40
+
+in another.
+
+That's also a consistency problem.
+
+13. Validity
+Question:
+
+Does the data follow the required rules or format?
+
+Example:
+
+If age must be:
+
+0–120
+
+then:
+
+Age = -5
+
+is invalid.
+
+If a percentage must be:
+
+0–100%
+
+then:
+
+150%
+
+is invalid.
+
+14. Uniqueness
+Question:
+
+Are records duplicated when they should be unique?
+
+For example, suppose Customer ID must be unique:
+
+Customer ID
+101
+102
+103
+101
+
+Customer 101 appears twice.
+
+❌ Possible uniqueness problem.
+
+15. Timeliness
+Question:
+
+Is the data current and available when needed?
+
+Imagine you're analyzing today's stock prices but your dataset was last updated three years ago.
+
+The data might be accurate historically, but it isn't timely for today's analysis.
+
+16. Relevance
+Question:
+
+Is the data appropriate for the problem you're trying to solve?
+
+Suppose you're trying to predict house prices.
+
+You have:
+
+House size
+Number of bedrooms
+Location
+Age of house
+
+These are potentially relevant.
+
+But you also have:
+
+Customer's favorite color
+
+It might not be relevant to the analysis.
+
+Good-quality data isn't just "correct."
+
+It must also be useful for the purpose.
+
+🧠 The Data Quality Dimensions to Memorize
+
+A useful set to remember is:
+
+Dimension	Main Question
+Accuracy	Is it correct?
+Completeness	Is anything missing?
+Consistency	Does it agree/follow the same standards?
+Validity	Does it follow the rules?
+Uniqueness	Are there unwanted duplicates?
+Timeliness	Is it current?
+Relevance	Is it appropriate for the purpose?
+Easy memory trick:
+
+A C C V U T R
+
+Accuracy
+Completeness
+Consistency
+Validity
+Uniqueness
+Timeliness
+Relevance
+
+🔗 Connecting Issues to Quality Dimensions
+
+This is where you should be able to think like a data analyst.
+
+Problem	Quality dimension affected
+Missing age	Completeness
+Wrong age	Accuracy
+Kenya, KENYA, kenya	Consistency
+Age = -5	Validity
+Same Customer ID twice	Uniqueness
+Three-year-old information	Timeliness
+Wrong data for the analysis	Relevance
+Salary stored as text	Validity / usability
+Duplicate transaction	Uniqueness
+Incorrect phone number	Accuracy
+
+Important: One issue can sometimes affect more than one dimension.
+
+For example, an outdated customer address can affect timeliness, and potentially accuracy if you're using it as the customer's current address.
+
+🧪 PRACTICAL EXAMPLE
+
+Imagine you receive this Excel dataset:
+
+Customer	Age	Country	Salary	Date
+John	25	Kenya	50000	01/01/2026
+Mary		Kenya	60000	01/02/2026
+Peter	-5	kenya	55000	01/03/2026
+John	25	Kenya	50000	01/01/2026
+Sarah	300	KENYA	"sixty thousand"	01/04/2026
+
+Let's identify the problems.
+
+Mary
+
+Age is missing.
+
+→ Completeness issue
+
+Peter
+
+Age = -5
+
+→ Validity issue
+
+Peter's country
+
+kenya instead of Kenya
+
+→ Consistency issue
+
+John
+
+John's record appears twice.
+
+→ Uniqueness issue
+
+Sarah
+
+Age = 300
+
+→ Validity issue
+
+Sarah's salary
+
+"sixty thousand" is text rather than a numerical salary.
+
+→ Data type/validity issue
+
+Country
+
+We have:
+
+Kenya
+kenya
+KENYA
+
+→ Consistency issue
+
+🎯 Your Data Quality Workflow
+
+When you receive a dataset, think:
+
+1. Understand → 2. Inspect → 3. Check → 4. Clean → 5. Validate → 6. Document
+
+Understand
+
+What does the data represent?
+
+↓
+
+Inspect
+
+Look at columns, rows and data types.
+
+↓
+
+Check
+
+Look for:
+
+Missing values
+Duplicates
+Errors
+Inconsistencies
+Invalid values
+Outliers
+
+↓
+
+Clean
+
+Fix the problems.
+
+↓
+
+Validate
+
+Check whether your cleaned data now meets the required quality standards.
+
+↓
+
+Document
+
+Record what you changed and why.
