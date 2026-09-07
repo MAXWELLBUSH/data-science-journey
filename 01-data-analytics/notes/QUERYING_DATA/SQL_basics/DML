@@ -1,0 +1,211 @@
+Data Manipulation Language (DML)
+
+DML stands for Data Manipulation Language.
+
+DML is used to work with the actual data (records/rows) inside database tables.
+
+Remember the distinction from the previous lesson:
+
+DDL → works with the structure of the database/table
+DML → works with the data inside the table
+
+Main DML commands
+Command	Purpose
+INSERT	Add new records
+UPDATE	Modify existing records
+DELETE	Remove records
+1. INSERT
+
+INSERT adds new data to a table.
+
+Suppose we have:
+
+CREATE TABLE customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    age INT,
+    city VARCHAR(50)
+);
+
+To add a customer:
+
+INSERT INTO customers (first_name, age, city)
+VALUES ('John', 25, 'Nairobi');
+
+The table now contains:
+
+customer_id	first_name	age	city
+1	John	25	Nairobi
+Adding multiple records
+
+You can insert several records at once:
+
+INSERT INTO customers (first_name, age, city)
+VALUES
+    ('Mary', 30, 'Mombasa'),
+    ('Peter', 27, 'Nairobi'),
+    ('Jane', 22, 'Kisumu');
+
+Now:
+
+customer_id	first_name	age	city
+1	John	25	Nairobi
+2	Mary	30	Mombasa
+3	Peter	27	Nairobi
+4	Jane	22	Kisumu
+2. UPDATE
+
+UPDATE changes existing records.
+
+Suppose Peter moves from Nairobi to Nakuru.
+
+UPDATE customers
+SET city = 'Nakuru'
+WHERE customer_id = 3;
+
+Now Peter's record becomes:
+
+customer_id	first_name	age	city
+3	Peter	27	Nakuru
+⚠️ Very important: WHERE
+
+Be careful with:
+
+UPDATE customers
+SET city = 'Nakuru';
+
+Because there is no WHERE, this could change every customer's city to Nakuru.
+
+Usually you want:
+
+UPDATE customers
+SET city = 'Nakuru'
+WHERE customer_id = 3;
+
+Think:
+
+WHERE tells SQL which rows to change.
+
+3. UPDATE Multiple Columns
+
+You can change more than one column:
+
+UPDATE customers
+SET age = 28,
+    city = 'Nairobi'
+WHERE customer_id = 3;
+
+Now both age and city are changed for customer 3.
+
+4. DELETE
+
+DELETE removes records from a table.
+
+For example:
+
+DELETE FROM customers
+WHERE customer_id = 4;
+
+This removes Jane's record.
+
+⚠️ Be careful!
+
+This:
+
+DELETE FROM customers;
+
+has no WHERE.
+
+It can delete all records in the table.
+
+So when you're learning, develop this habit:
+
+Before running UPDATE or DELETE, check your WHERE condition.
+
+5. DML vs DDL
+
+This is one of the most important things to understand.
+
+DDL
+
+Works with structure:
+
+CREATE TABLE customers (...);
+
+ALTER TABLE customers
+ADD phone_number VARCHAR(20);
+
+DROP TABLE customers;
+
+You're changing the table itself.
+
+DML
+
+Works with data:
+
+INSERT INTO customers (...);
+
+UPDATE customers
+SET age = 30
+WHERE customer_id = 1;
+
+DELETE FROM customers
+WHERE customer_id = 1;
+
+You're changing the records inside the table.
+
+6. Practical Example
+
+Imagine this table:
+
+customers
+
+customer_id | name  | age | city
+------------|-------|-----|--------
+1           | John  | 25  | Nairobi
+2           | Mary  | 30  | Mombasa
+3           | Peter | 27  | Nairobi
+Add a customer
+INSERT INTO customers (name, age, city)
+VALUES ('Jane', 22, 'Kisumu');
+
+INSERT → adds data
+
+Change John's age
+UPDATE customers
+SET age = 26
+WHERE customer_id = 1;
+
+UPDATE → changes data
+
+Remove Mary
+DELETE FROM customers
+WHERE customer_id = 2;
+
+DELETE → removes data
+
+🧠 Easy way to remember
+
+Think about a spreadsheet.
+
+You have a table:
+
+┌─────────────────────┐
+│     TABLE STRUCTURE │
+├─────────────────────┤
+│ John   25  Nairobi  │ ← DATA
+│ Mary   30  Mombasa  │ ← DATA
+│ Peter  27  Nairobi  │ ← DATA
+└─────────────────────┘
+
+DDL changes the container/structure:
+
+CREATE → Create the container
+ALTER  → Change the container
+DROP   → Remove the container
+
+DML changes what's inside the container:
+
+INSERT → Put data in
+UPDATE → Change data
+DELETE → Take data out

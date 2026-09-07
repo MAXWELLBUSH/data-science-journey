@@ -1,0 +1,405 @@
+SQL Syntax and Best Practices
+1. What is SQL syntax?
+
+SQL syntax is the set of rules for writing SQL statements correctly.
+
+For example:
+
+SELECT name
+FROM customers
+WHERE age > 18;
+
+SQL reads this roughly as:
+
+Select the name column from customers where age is greater than 18.
+
+2. Basic SQL statement structure
+
+A common query follows this pattern:
+
+SELECT column_name
+FROM table_name
+WHERE condition;
+
+Example:
+
+SELECT first_name
+FROM customers
+WHERE age > 18;
+The important keywords
+Keyword	Purpose
+SELECT	Choose columns
+FROM	Specify the table
+WHERE	Filter rows
+ORDER BY	Sort results
+GROUP BY	Group rows
+HAVING	Filter groups
+INSERT INTO	Add records
+UPDATE	Modify records
+DELETE	Delete records
+CREATE TABLE	Create a table
+ALTER TABLE	Modify a table
+DROP TABLE	Delete a table
+3. SQL keywords are usually written in uppercase
+
+This is not required in most SQL systems, but it makes your queries easier to read.
+
+Less readable
+select name from customers where age > 18;
+Better
+SELECT name
+FROM customers
+WHERE age > 18;
+
+Notice how each major part is on its own line.
+
+4. End statements with ;
+
+Use a semicolon to indicate the end of a SQL statement.
+
+SELECT *
+FROM customers;
+
+You can have multiple statements:
+
+SELECT *
+FROM customers;
+
+SELECT *
+FROM orders;
+
+You don't delete the previous query. You can write the next query underneath it.
+
+This is especially useful in MySQL Workbench.
+
+5. Use meaningful table and column names
+Poor
+CREATE TABLE t1 (
+    x INT,
+    y VARCHAR(50)
+);
+
+You won't easily know what x and y mean.
+
+Better
+CREATE TABLE customers (
+    customer_id INT,
+    first_name VARCHAR(50),
+    email VARCHAR(100)
+);
+
+The names tell you what the data represents.
+
+6. Use snake_case for names
+
+A common convention is:
+
+customer_id
+first_name
+last_name
+order_date
+created_at
+updated_at
+
+Instead of:
+
+customerID
+FirstName
+OrderDate
+
+Both may work, but consistency is important.
+
+7. Choose the correct data type
+
+As we just discussed:
+
+customer_id INT
+first_name VARCHAR(50)
+price DECIMAL(10,2)
+birth_date DATE
+created_at TIMESTAMP
+is_active BOOLEAN
+
+Don't store everything as VARCHAR.
+
+For example, avoid:
+
+price VARCHAR(50)
+age VARCHAR(10)
+
+when those values are actually numerical.
+
+8. Don't use SELECT * unnecessarily
+
+SELECT * means:
+
+Give me all columns.
+
+Example:
+
+SELECT *
+FROM customers;
+
+It's useful while learning and exploring data.
+
+But in professional queries, it's often better to specify the columns you need:
+
+SELECT customer_id, first_name, email
+FROM customers;
+
+This makes your query clearer and can avoid retrieving unnecessary data.
+
+9. Use WHERE carefully
+
+WHERE filters rows.
+
+SELECT *
+FROM customers
+WHERE age > 25;
+
+This returns customers older than 25.
+
+You can combine conditions:
+
+SELECT *
+FROM customers
+WHERE age > 25
+AND city = 'Nairobi';
+Strings use quotes
+WHERE city = 'Nairobi'
+
+Numbers don't need quotes:
+
+WHERE age = 25
+
+So:
+
+age = '25'
+
+and
+
+age = 25
+
+are not necessarily treated the same way.
+
+10. Remember the difference between = and LIKE
+
+= means an exact match:
+
+WHERE first_name = 'John'
+
+LIKE is useful for pattern matching:
+
+WHERE first_name LIKE 'Jo%';
+
+This could match:
+
+John
+Joseph
+Joshua
+
+% means zero or more characters.
+
+11. Use ORDER BY to sort
+SELECT *
+FROM customers
+ORDER BY age;
+
+By default, this is ascending:
+
+20
+25
+30
+35
+
+For descending:
+
+SELECT *
+FROM customers
+ORDER BY age DESC;
+
+Result:
+
+35
+30
+25
+20
+
+Remember:
+
+ASC = ascending
+DESC = descending
+
+12. Use comments
+
+Comments help explain your SQL.
+
+Single-line comment:
+
+-- Get customers older than 25
+SELECT *
+FROM customers
+WHERE age > 25;
+
+You can also use:
+
+/*
+   Get customers
+   older than 25
+*/
+SELECT *
+FROM customers
+WHERE age > 25;
+
+Comments are especially useful when you're documenting your learning.
+
+13. Don't repeat unnecessary code
+
+Suppose you want customers from Nairobi:
+
+SELECT *
+FROM customers
+WHERE city = 'Nairobi';
+
+Keep the query simple.
+
+Don't write unnecessarily complicated SQL when a simple query gives the same result.
+
+14. Use constraints when creating tables
+
+Constraints protect your data.
+
+Example:
+
+CREATE TABLE customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT
+);
+
+Here:
+
+PRIMARY KEY
+
+Uniquely identifies each record.
+
+customer_id INT PRIMARY KEY
+NOT NULL
+
+Means the value cannot be missing.
+
+first_name VARCHAR(50) NOT NULL
+UNIQUE
+
+Prevents duplicate values.
+
+email VARCHAR(100) UNIQUE
+AUTO_INCREMENT
+
+Automatically generates the next ID.
+
+customer_id INT AUTO_INCREMENT
+15. Be careful with UPDATE
+
+This is very important.
+
+Suppose you write:
+
+UPDATE customers
+SET city = 'Nairobi';
+
+You haven't specified a WHERE condition.
+
+That can change every customer's city to Nairobi.
+
+Usually you want:
+
+UPDATE customers
+SET city = 'Nairobi'
+WHERE customer_id = 5;
+
+Now only customer 5 is changed.
+
+16. Be careful with DELETE
+
+Same idea.
+
+Dangerous:
+DELETE FROM customers;
+
+This can delete all records in the table.
+
+Safer:
+DELETE FROM customers
+WHERE customer_id = 5;
+
+This deletes only customer 5.
+
+Always think carefully before running UPDATE or DELETE without WHERE.
+
+17. A practical SQL example
+
+Suppose we have:
+
+customers
+customer_id	first_name	age	city
+1	John	22	Nairobi
+2	Mary	30	Mombasa
+3	Peter	27	Nairobi
+4	Jane	19	Kisumu
+
+You want Nairobi customers older than 20.
+
+Write:
+
+SELECT customer_id, first_name, age
+FROM customers
+WHERE city = 'Nairobi'
+AND age > 20
+ORDER BY age DESC;
+
+The SQL logic is:
+
+SELECT       → what do I want?
+FROM         → where is it?
+WHERE        → which rows?
+AND          → additional condition
+ORDER BY     → how should I sort?
+DESC         → descending
+18. The most important SQL best practices to remember
+
+For your notes, remember these:
+
+Use uppercase for SQL keywords
+
+SELECT, FROM, WHERE, INSERT, UPDATE
+
+Use meaningful table and column names
+
+customer_id
+order_date
+first_name
+Use consistent naming, such as snake_case.
+
+Choose appropriate data types
+
+INT → whole numbers
+DECIMAL → exact decimals/money
+VARCHAR → text
+DATE → date
+TIMESTAMP → date + time
+BOOLEAN → true/false
+End SQL statements with ;
+Use indentation and separate lines to make queries readable.
+Use comments to document complicated queries.
+Specify columns instead of always using SELECT *.
+Always be careful with UPDATE and DELETE.
+Use constraints such as PRIMARY KEY, NOT NULL, and UNIQUE to protect data.
+Your basic SQL pattern to memorize
+SELECT column1, column2
+FROM table_name
+WHERE condition
+ORDER BY column1 DESC;
+
+Once you're comfortable with this structure, the next major pieces are INSERT, UPDATE, DELETE, aggregate functions (COUNT, SUM, AVG, MIN, MAX), GROUP BY, and JOINs.
