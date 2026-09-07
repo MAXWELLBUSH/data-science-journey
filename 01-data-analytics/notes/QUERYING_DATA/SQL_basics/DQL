@@ -1,0 +1,379 @@
+DQL — Data Query Language
+
+Now we move to one of the most important parts of SQL for data analytics: DQL.
+
+1. What is DQL?
+
+DQL = Data Query Language
+
+DQL is used to retrieve/read data from a database.
+
+The main command you need to know is:
+
+SELECT
+
+Think of it this way:
+
+SQL category	Purpose	Main commands
+DDL	Structure of database	CREATE, ALTER, DROP, TRUNCATE
+DML	Change the data	INSERT, UPDATE, DELETE
+DQL	Read/retrieve the data	SELECT
+2. SELECT
+
+Suppose we have:
+
+customers
+customer_id	first_name	age	city
+1	John	25	Nairobi
+2	Mary	30	Mombasa
+3	Peter	27	Nairobi
+4	Jane	22	Kisumu
+5	Alice	24	Nairobi
+
+To retrieve everything:
+
+SELECT *
+FROM customers;
+
+* means:
+
+all columns
+
+3. Selecting specific columns
+
+Instead of retrieving everything:
+
+SELECT first_name, city
+FROM customers;
+
+Result:
+
+first_name	city
+John	Nairobi
+Mary	Mombasa
+Peter	Nairobi
+Jane	Kisumu
+Alice	Nairobi
+
+This is usually better than using SELECT * when you only need certain columns.
+
+4. WHERE
+
+WHERE allows you to filter records.
+
+For example, find customers from Nairobi:
+
+SELECT *
+FROM customers
+WHERE city = 'Nairobi';
+
+Result:
+
+customer_id	first_name	age	city
+1	John	25	Nairobi
+3	Peter	27	Nairobi
+5	Alice	24	Nairobi
+
+Think:
+
+SELECT = What do I want to see?
+FROM = Which table?
+WHERE = Which records?
+
+5. Comparison operators
+
+You can use:
+
+Operator	Meaning
+=	Equal to
+<>	Not equal to
+!=	Not equal to
+>	Greater than
+<	Less than
+>=	Greater than or equal
+<=	Less than or equal
+Example
+
+Customers older than 25:
+
+SELECT *
+FROM customers
+WHERE age > 25;
+
+Customers aged 25 or older:
+
+SELECT *
+FROM customers
+WHERE age >= 25;
+
+Customers not from Nairobi:
+
+SELECT *
+FROM customers
+WHERE city <> 'Nairobi';
+6. AND
+
+AND means both conditions must be true.
+
+For example:
+
+Find customers from Nairobi AND older than 25.
+
+SELECT *
+FROM customers
+WHERE city = 'Nairobi'
+AND age > 25;
+
+Only Peter qualifies.
+
+7. OR
+
+OR means at least one condition must be true.
+
+SELECT *
+FROM customers
+WHERE city = 'Nairobi'
+OR city = 'Mombasa';
+
+This returns customers from either Nairobi or Mombasa.
+
+Easy way to remember:
+AND → condition 1 AND condition 2 must both be true
+
+OR  → condition 1 OR condition 2 can be true
+8. BETWEEN
+
+BETWEEN finds values within a range.
+
+For example:
+
+Find customers aged between 24 and 27.
+
+SELECT *
+FROM customers
+WHERE age BETWEEN 24 AND 27;
+
+This includes 24 and 27.
+
+So:
+
+24 ≤ age ≤ 27
+9. IN
+
+IN is useful when you want to match several possible values.
+
+Instead of:
+
+SELECT *
+FROM customers
+WHERE city = 'Nairobi'
+OR city = 'Mombasa'
+OR city = 'Kisumu';
+
+You can write:
+
+SELECT *
+FROM customers
+WHERE city IN ('Nairobi', 'Mombasa', 'Kisumu');
+
+Much cleaner.
+
+Think:
+
+IN = "Is the value one of these?"
+
+10. NOT IN
+
+You can also exclude values.
+
+SELECT *
+FROM customers
+WHERE city NOT IN ('Nairobi', 'Mombasa');
+
+This returns customers whose city is neither Nairobi nor Mombasa.
+
+11. LIKE
+
+LIKE is used for pattern matching, especially with text.
+
+Names beginning with A
+SELECT *
+FROM customers
+WHERE first_name LIKE 'A%';
+
+% means:
+
+Any number of characters.
+
+So this could find:
+
+Alice
+Andrew
+Ann
+Anthony
+Names ending with n
+SELECT *
+FROM customers
+WHERE first_name LIKE '%n';
+Names containing ar
+SELECT *
+FROM customers
+WHERE first_name LIKE '%ar%';
+12. The % wildcard
+
+Remember:
+
+'A%'     → starts with A
+'%A'     → ends with A
+'%A%'    → contains A
+
+This is very important for data analysis because you often need to search/filter text data.
+
+13. DISTINCT
+
+DISTINCT removes duplicate values from the result.
+
+Suppose cities are:
+
+Nairobi
+Mombasa
+Nairobi
+Kisumu
+Nairobi
+
+If you run:
+
+SELECT city
+FROM customers;
+
+You get:
+
+Nairobi
+Mombasa
+Nairobi
+Kisumu
+Nairobi
+
+But:
+
+SELECT DISTINCT city
+FROM customers;
+
+gives:
+
+Nairobi
+Mombasa
+Kisumu
+
+So:
+
+DISTINCT = show each value only once.
+
+14. ORDER BY
+
+You already learned this one.
+
+You can combine it with SELECT.
+
+Sort ages from smallest to largest:
+SELECT *
+FROM customers
+ORDER BY age ASC;
+Largest to smallest:
+SELECT *
+FROM customers
+ORDER BY age DESC;
+
+You can also select specific columns:
+
+SELECT first_name, age
+FROM customers
+ORDER BY age DESC;
+15. LIMIT
+
+LIMIT controls how many rows you want returned.
+
+For example:
+
+SELECT *
+FROM customers
+LIMIT 3;
+
+This returns only 3 records.
+
+Very useful when you have thousands or millions of records and just want to inspect a few.
+
+16. Combining everything
+
+This is where SQL becomes powerful.
+
+For example:
+
+Find customers from Nairobi who are older than 23, show only their names and ages, and sort them from oldest to youngest.
+
+SELECT first_name, age
+FROM customers
+WHERE city = 'Nairobi'
+AND age > 23
+ORDER BY age DESC;
+
+Notice the logical flow:
+
+SELECT      → what do I want?
+FROM        → where is it?
+WHERE       → which rows?
+ORDER BY    → how should I sort them?
+🧠 DQL Cheat Sheet
+-- Everything
+SELECT *
+FROM customers;
+
+-- Specific columns
+SELECT first_name, age
+FROM customers;
+
+-- Filter
+SELECT *
+FROM customers
+WHERE age > 25;
+
+-- AND
+SELECT *
+FROM customers
+WHERE age > 25
+AND city = 'Nairobi';
+
+-- OR
+SELECT *
+FROM customers
+WHERE city = 'Nairobi'
+OR city = 'Mombasa';
+
+-- Range
+SELECT *
+FROM customers
+WHERE age BETWEEN 20 AND 30;
+
+-- Multiple values
+SELECT *
+FROM customers
+WHERE city IN ('Nairobi', 'Kisumu');
+
+-- Pattern matching
+SELECT *
+FROM customers
+WHERE first_name LIKE 'A%';
+
+-- Unique values
+SELECT DISTINCT city
+FROM customers;
+
+-- Sort
+SELECT *
+FROM customers
+ORDER BY age DESC;
+
+-- Limit results
+SELECT *
+FROM customers
+LIMIT 5;
